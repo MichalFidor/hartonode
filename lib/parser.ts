@@ -1,4 +1,5 @@
 import * as jsesc from 'jsesc'
+import * as _ from 'lodash'
 import { request } from './type/request';
 
 class Parser {
@@ -36,27 +37,33 @@ class Parser {
 
   public toNode(request: request[]) {
 
-    var nodeCode = 'import * as request from \'request\';\n\n'
+    var nodeCode = 'import * as request from \'sync-request\';\n\n'
 
     for (let j = 0; j < request.length; j++) {
 
       if (j === 0) {
         var apiUrl = this.matchUrl(request[j].url, 1);
         nodeCode += `let apiUrl = '${apiUrl}'\n\n`
+        nodeCode += `let HEADERS = {\n`
+        nodeCode += this.getHeaders(request[j]);
       } else if (j !== 0) {
 
-        var first = this.matchUrl(request[j].url, 1).toString()
-        var second = this.matchUrl(request[j - 1].url, 1).toString()
+        var previousUrl = this.matchUrl(request[j].url, 1).toString()
+        var actualUrl = this.matchUrl(request[j - 1].url, 1).toString()
 
-        if (first !== second) {
+        if (previousUrl !== actualUrl) {
           apiUrl = this.matchUrl(request[j].url, 1);
-          nodeCode += '/*------> apiUrl has changed!!! <------\n\n !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n\n ------> apiUrl has changed!!! <------*/\n\n'
+          nodeCode += '/*------> apiUrl has changed!!! <------\n\n \n\n ------> apiUrl has changed!!! <------*/\n\n'
           nodeCode += `apiUrl = '${apiUrl}'\n\n`
         }
+        
+        if(!_.isMatch(request[j].headers, request[j-1].headers)) {
+          nodeCode += `HEADERS = {\n`
+          nodeCode += this.getHeaders(request[j]);
+        }
       }
-
-      nodeCode += `function request${j}_${request[j].method}() {\n    const HEADERS = {\n`
-      nodeCode += this.getHeaders(request[j]);
+      
+      nodeCode += `function request${j}_${request[j].method}() {\n`
 
       if (request[j].data) {
         // escape single quotes if there are any in there
@@ -66,12 +73,10 @@ class Parser {
         nodeCode += `    const DATA = \'${request[j].data}\';\n\n`
       }
 
+      nodeCode += `    const ENDPOINT = '${this.matchUrl(request[j].url, 3)}' \n`
       nodeCode += '    const OPTIONS = {\n'
-      nodeCode += `        url: \`\$\{apiUrl\}${this.matchUrl(request[j].url, 3)}\`,\n`
-      nodeCode += `        method: \'${request[j].method}\'`
 
       if (request[j].headers || request[j].cookies) {
-        nodeCode += ',\n'
         nodeCode += '        headers: HEADERS'
       }
       if (request[j].data) {
@@ -79,20 +84,13 @@ class Parser {
       }
 
       nodeCode += '\n    };\n\n '
-      nodeCode += `   return request(OPTIONS, callback); \n};\n\n`
+      nodeCode += `   return request.default(\'${request[j].method}\', \`\$\{apiUrl\}\$\{ENDPOINT\}\`, OPTIONS); \n};\n\n`
     }
-
-    nodeCode += 'function callback(error: boolean, response: any, body: any) {\n'
-    nodeCode += '    if (!error && response.statusCode == 200) {\n'
-    nodeCode += '        console.log(body);\n'
-    nodeCode += '    }\n'
-    nodeCode += '}\n\n'
-
 
     return nodeCode + '\n'
   }
 
-  private getHeaders(request) {
+  private getHeaders(request: request) {
     var nodeCode = ''
     if (request.headers || request.cookies) {
       var headerCount = Object.keys(request.headers).length
@@ -100,9 +98,9 @@ class Parser {
       var i = 0
       for (var headerName in request.headers) {
         if (headerName === 'Content-Length') {
-          nodeCode += `        // \'${headerName}\': \"${request.headers[headerName]}\"`
+          nodeCode += `    // \'${headerName}\': \"${request.headers[headerName]}\"`
         } else {
-          nodeCode += `        \'${headerName}\': \"${request.headers[headerName]}\"`
+          nodeCode += `    \'${headerName}\': \"${request.headers[headerName]}\"`
         }
         if (i < headerCount - 1 || request.cookies) {
           nodeCode += ',\n'
@@ -111,11 +109,11 @@ class Parser {
         }
         i++
       }
-      console.log(request.headers)
+
       if (request.cookies) {
-        nodeCode += `        \'Cookie\': \"${request.cookies}\"\n`
+        nodeCode += `    \'Cookie\': \"${request.cookies}\"\n`
       }
-      nodeCode += '    };\n\n'
+      nodeCode += '};\n\n'
     }
     return nodeCode
 
@@ -185,6 +183,7 @@ class Parser {
     command.url = entry.request.url;
     return command;
   }
+
 }
 
 const parser = new Parser();
