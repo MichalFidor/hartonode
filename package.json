@@ -7,8 +7,10 @@
     "convert-string": "^0.1.0",
     "fs": "0.0.1-security",
     "jsesc": "^2.5.2",
+    "lodash": "^4.17.14",
     "path": "^0.12.7",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "sync-request": "^6.1.0"
   },
   "config": {
     "unsafe-perm": true
