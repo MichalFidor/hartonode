@@ -1,7 +1,12 @@
 {
   "name": "hartonode",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Parser for requests saved on har file",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:testarmydev/har_to_node.git"
+  },
   "dependencies": {
     "@types/jsesc": "^0.4.29",
     "@types/lodash": "^4.14.136",

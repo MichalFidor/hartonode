@@ -4,7 +4,7 @@
  * @author Michał Fidor <michal.fidor@gmail.com>
  * @license MIT license
  * @copyright Copyright (c) 2019, Michał Fidor
- * @version 1.0.0
+ * @version 1.0.4
  * @preserve
  */
 
@@ -15,17 +15,16 @@ import * as _ from "lodash";
 
 function harToNode(har: any) {
   har.toString("utf-8");
-  const prettyJson = harToObject(har);
-  return toNode(prettyJson);
+  const OBJECT = harToObject(har);
+  return toNode(OBJECT);
 }
 
 function harToNodeToFile(har: any) {
   har.toString("utf-8");
-  const prettyJson = harToObject(har);
-
-  const fileToWrite = "./requests.ts";
-
-  return fs.writeFile(path.resolve(__dirname, fileToWrite), prettyJson, (err) => {
+  const OBJECT = harToObject(har);
+  const FILE_PATH = './requests.ts';
+  const OUTPUT = toNode(OBJECT);
+  return fs.writeFile(path.resolve(__dirname, FILE_PATH), OUTPUT, (err) => {
     if (err) throw err;
   
     console.log("The file was succesfully saved!");
