@@ -5,7 +5,7 @@
  * @author Michał Fidor <michal.fidor@gmail.com>
  * @license MIT license
  * @copyright Copyright (c) 2019, Michał Fidor
- * @version 1.0.0
+ * @version 1.0.4
  * @preserve
  */
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -15,15 +15,16 @@ const jsesc = require("jsesc");
 const _ = require("lodash");
 function harToNode(har) {
     har.toString("utf-8");
-    const prettyJson = harToObject(har);
-    return toNode(prettyJson);
+    const OBJECT = harToObject(har);
+    return toNode(OBJECT);
 }
 exports.harToNode = harToNode;
 function harToNodeToFile(har) {
     har.toString("utf-8");
-    const prettyJson = harToObject(har);
-    const fileToWrite = "./requests.ts";
-    fs.writeFile(path.resolve(__dirname, fileToWrite), prettyJson, (err) => {
+    const OBJECT = harToObject(har);
+    const FILE_PATH = './requests.ts';
+    const OUTPUT = toNode(OBJECT);
+    return fs.writeFile(path.resolve(__dirname, FILE_PATH), OUTPUT, (err) => {
         if (err)
             throw err;
         console.log("The file was succesfully saved!");
@@ -153,7 +154,4 @@ function toNode(request) {
             : (nodeCode += `   return request.default(\'${request[j].method}\', \`\$\{apiUrl\}\`, OPTIONS); \n};\n\n`);
     }
     return nodeCode + "\n";
-}
-function selectFile(fileToUpload) {
-    return fs.readFileSync(path.resolve(__dirname, fileToUpload));
 }

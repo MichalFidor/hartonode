@@ -1,6 +1,6 @@
 {
   "name": "hartonode",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Parser for requests saved on har file",
   "license": "MIT",
   "repository": {
