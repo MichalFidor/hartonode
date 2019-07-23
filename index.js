@@ -5,7 +5,7 @@
  * @author Michał Fidor <michal.fidor@gmail.com>
  * @license MIT license
  * @copyright Copyright (c) 2019, Michał Fidor
- * @version 1.0.4
+ * @version 1.0.6
  * @preserve
  */
 Object.defineProperty(exports, "__esModule", { value: true });

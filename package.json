@@ -2,11 +2,7 @@
     "name": "hartonode",
     "version": "1.0.6",
     "description": "Parser for requests saved to HAR file",
-    "main": "index.js",
-    "scripts": {
-        "build": "tsc",
-        "test": "mocha --reporter spec"
-    },
+    "main": "index.ts",
     "repository": {
         "type": "git",
         "url": "git+ssh://git@bitbucket.org/testarmydev/har_to_node.git"
@@ -37,5 +33,9 @@
         "mocha": "^6.1.4",
         "ts-node": "^8.3.0",
         "typescript": "^3.5.2"
+    },
+    "scripts": {
+        "build": "tsc",
+        "test": "mocha --reporter spec"
     }
 }
