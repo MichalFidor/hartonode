@@ -9,6 +9,7 @@
  * @preserve
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const path = require("path");
 const fs = require("fs");
 const jsesc = require("jsesc");
 const _ = require("lodash");
@@ -154,3 +155,7 @@ function toNode(request) {
     }
     return nodeCode + "\n";
 }
+function selectFile(fileToUpload) {
+    return fs.readFileSync(path.resolve(fileToUpload));
+}
+exports.selectFile = selectFile;
