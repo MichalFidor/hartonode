@@ -1,9 +1,11 @@
 {
-  "name": "parser",
-  "version": "0.0.1",
-  "description": "Parser for requests har",
+  "name": "hartonode",
+  "version": "1.0.0",
+  "description": "Parser for requests saved on har file",
   "private": true,
   "dependencies": {
+    "@types/jsesc": "^0.4.29",
+    "@types/lodash": "^4.14.136",
     "convert-string": "^0.1.0",
     "fs": "0.0.1-security",
     "jsesc": "^2.5.2",
@@ -17,7 +19,13 @@
   },
   "devDependencies": {
     "@types/node": "^12.0.12",
+    "chai": "^4.2.0",
+    "mocha": "^6.1.4",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.2"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha --reporter spec"
   }
 }

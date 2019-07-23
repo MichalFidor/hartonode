@@ -1,4 +1,5 @@
 node_modules/
-output/*.ts
+output/
 .vscode
-*.har
+./*.har
+check.*
