@@ -1,6 +1,6 @@
 {
-  "name": "parser",
-  "version": "0.0.1",
+  "name": "hartonode",
+  "version": "1.0.0",
   "description": "Parser for requests saved on har file",
   "private": true,
   "dependencies": {
