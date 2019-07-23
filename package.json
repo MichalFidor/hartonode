@@ -2,7 +2,6 @@
   "name": "hartonode",
   "version": "1.0.0",
   "description": "Parser for requests saved on har file",
-  "private": true,
   "dependencies": {
     "@types/jsesc": "^0.4.29",
     "@types/lodash": "^4.14.136",
