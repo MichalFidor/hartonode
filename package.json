@@ -1,8 +1,8 @@
 {
     "name": "hartonode",
-    "version": "1.0.6",
+    "version": "1.0.9",
     "description": "Parser for requests saved to HAR file",
-    "main": "index.ts",
+    "main": "index.js",
     "repository": {
         "type": "git",
         "url": "git+ssh://git@bitbucket.org/testarmydev/har_to_node.git"

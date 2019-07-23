@@ -3,3 +3,5 @@ output/
 .vscode
 ./*.har
 check.*
+*.git
+.git
