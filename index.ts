@@ -8,6 +8,8 @@
  * @preserve
  */
 
+import * as fs from 'fs';
+import * as path from 'path';
 import * as jsesc from "jsesc";
 import * as _ from "lodash";
 
@@ -15,6 +17,19 @@ function harToNode(har: any) {
   har.toString("utf-8");
   const prettyJson = harToObject(har);
   return toNode(prettyJson);
+}
+
+function harToNodeToFile(har: any) {
+  har.toString("utf-8");
+  const prettyJson = harToObject(har);
+
+  const fileToWrite = "./requests.ts";
+
+  fs.writeFile(path.resolve(__dirname, fileToWrite), prettyJson, (err) => {
+    if (err) throw err;
+  
+    console.log("The file was succesfully saved!");
+  }); 
 }
 
 function harToObject(har: any) {
@@ -187,6 +202,11 @@ function toNode(request: request[]) {
   return nodeCode + "\n";
 }
 
+function selectFile(fileToUpload: string): Buffer{
+  return fs.readFileSync(path.resolve(__dirname, fileToUpload));
+}
+
+
 interface request {
   command?: string;
   method: string;
@@ -204,4 +224,4 @@ interface cookies {
   [inputs: string]: string | number;
 }
 
-export { harToNode, harToObject, getHeaders, matchUrl };
+export { harToNode, harToNodeToFile, harToObject, getHeaders, matchUrl };
