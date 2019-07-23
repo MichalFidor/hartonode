@@ -25,7 +25,7 @@ function harToNodeToFile(har: any) {
 
   const fileToWrite = "./requests.ts";
 
-  fs.writeFile(path.resolve(__dirname, fileToWrite), prettyJson, (err) => {
+  return fs.writeFile(path.resolve(__dirname, fileToWrite), prettyJson, (err) => {
     if (err) throw err;
   
     console.log("The file was succesfully saved!");
@@ -201,11 +201,6 @@ function toNode(request: request[]) {
 
   return nodeCode + "\n";
 }
-
-function selectFile(fileToUpload: string): Buffer{
-  return fs.readFileSync(path.resolve(__dirname, fileToUpload));
-}
-
 
 interface request {
   command?: string;
