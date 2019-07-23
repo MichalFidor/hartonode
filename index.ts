@@ -4,10 +4,11 @@
  * @author Michał Fidor <michal.fidor@gmail.com>
  * @license MIT license
  * @copyright Copyright (c) 2019, Michał Fidor
- * @version 1.0.6
+ * @version 1.1.0
  * @preserve
  */
 
+import * as path from 'path';
 import * as fs from 'fs';
 import * as jsesc from "jsesc";
 import * as _ from "lodash";
@@ -200,6 +201,10 @@ function toNode(request: request[]) {
   return nodeCode + "\n";
 }
 
+function selectFile(fileToUpload: string) {
+  return fs.readFileSync(path.resolve(fileToUpload));
+}
+
 interface request {
   command?: string;
   method: string;
@@ -217,4 +222,4 @@ interface cookies {
   [inputs: string]: string | number;
 }
 
-export { harToNode, harToNodeToFile, harToObject, getHeaders, matchUrl };
+export { harToNode, harToNodeToFile, harToObject, getHeaders, matchUrl, selectFile };

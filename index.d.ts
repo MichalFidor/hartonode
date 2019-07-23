@@ -7,11 +7,13 @@
  * @version 1.0.6
  * @preserve
  */
+/// <reference types="node" />
 declare function harToNode(har: any): string;
 declare function harToNodeToFile(har: any): void;
 declare function harToObject(har: any): any;
 declare function getHeaders(request: request): string;
 declare function matchUrl(url: string, group: number): string;
+declare function selectFile(fileToUpload: string): Buffer;
 interface request {
     command?: string;
     method: string;
@@ -26,4 +28,4 @@ interface headers {
 interface cookies {
     [inputs: string]: string | number;
 }
-export { harToNode, harToNodeToFile, harToObject, getHeaders, matchUrl };
+export { harToNode, harToNodeToFile, harToObject, getHeaders, matchUrl, selectFile };
