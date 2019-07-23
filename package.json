@@ -1,6 +1,6 @@
 {
   "name": "hartonode",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Parser for requests saved on har file",
   "dependencies": {
     "@types/jsesc": "^0.4.29",

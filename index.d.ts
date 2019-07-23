@@ -8,6 +8,7 @@
  * @preserve
  */
 declare function harToNode(har: any): string;
+declare function harToNodeToFile(har: any): void;
 declare function harToObject(har: any): any;
 declare function getHeaders(request: request): string;
 declare function matchUrl(url: string, group: number): string;
@@ -25,4 +26,4 @@ interface headers {
 interface cookies {
     [inputs: string]: string | number;
 }
-export { harToNode, harToObject, getHeaders, matchUrl };
+export { harToNode, harToNodeToFile, harToObject, getHeaders, matchUrl };

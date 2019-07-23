@@ -9,6 +9,8 @@
  * @preserve
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+const fs = require("fs");
+const path = require("path");
 const jsesc = require("jsesc");
 const _ = require("lodash");
 function harToNode(har) {
@@ -17,6 +19,17 @@ function harToNode(har) {
     return toNode(prettyJson);
 }
 exports.harToNode = harToNode;
+function harToNodeToFile(har) {
+    har.toString("utf-8");
+    const prettyJson = harToObject(har);
+    const fileToWrite = "./requests.ts";
+    fs.writeFile(path.resolve(__dirname, fileToWrite), prettyJson, (err) => {
+        if (err)
+            throw err;
+        console.log("The file was succesfully saved!");
+    });
+}
+exports.harToNodeToFile = harToNodeToFile;
 function harToObject(har) {
     har = JSON.parse(har);
     if (har.request) {
@@ -140,4 +153,7 @@ function toNode(request) {
             : (nodeCode += `   return request.default(\'${request[j].method}\', \`\$\{apiUrl\}\`, OPTIONS); \n};\n\n`);
     }
     return nodeCode + "\n";
+}
+function selectFile(fileToUpload) {
+    return fs.readFileSync(path.resolve(__dirname, fileToUpload));
 }
