@@ -10,7 +10,6 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = require("fs");
-const path = require("path");
 const jsesc = require("jsesc");
 const _ = require("lodash");
 function harToNode(har) {
@@ -24,7 +23,7 @@ function harToNodeToFile(har) {
     const OBJECT = harToObject(har);
     const FILE_PATH = './requests.ts';
     const OUTPUT = toNode(OBJECT);
-    return fs.writeFile(path.resolve(__dirname, FILE_PATH), OUTPUT, (err) => {
+    return fs.writeFile(FILE_PATH, OUTPUT, (err) => {
         if (err)
             throw err;
         console.log("The file was succesfully saved!");

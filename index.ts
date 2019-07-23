@@ -4,12 +4,11 @@
  * @author Michał Fidor <michal.fidor@gmail.com>
  * @license MIT license
  * @copyright Copyright (c) 2019, Michał Fidor
- * @version 1.0.4
+ * @version 1.0.6
  * @preserve
  */
 
 import * as fs from 'fs';
-import * as path from 'path';
 import * as jsesc from "jsesc";
 import * as _ from "lodash";
 
@@ -24,7 +23,7 @@ function harToNodeToFile(har: any) {
   const OBJECT = harToObject(har);
   const FILE_PATH = './requests.ts';
   const OUTPUT = toNode(OBJECT);
-  return fs.writeFile(path.resolve(__dirname, FILE_PATH), OUTPUT, (err) => {
+  return fs.writeFile(FILE_PATH, OUTPUT, (err) => {
     if (err) throw err;
   
     console.log("The file was succesfully saved!");
