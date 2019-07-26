@@ -5,7 +5,7 @@
  * @author Michał Fidor <michal.fidor@gmail.com>
  * @license MIT license
  * @copyright Copyright (c) 2019, Michał Fidor
- * @version 1.2.0
+ * @version 1.2.1
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 const path = require("path");
