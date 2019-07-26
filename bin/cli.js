@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 
-var hrn = require('../index')
-var path = require('path')
-const argv = require('yargs').argv
+var hrn = require('../index');
+var path = require('path');
+const argv = require('yargs').argv;
+
+if (argv.h || argv.help)
+return help();
 
 // outputs the help menu
 function help() {
@@ -12,8 +15,6 @@ function help() {
   \t If no <file path> is passes, the script won't be able to convert your HAR file`)
 }
 
-if (argv.h || argv.help)
-return help()
 
 const file = process.argv[2]
 try {

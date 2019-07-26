@@ -3,7 +3,7 @@ It's a simple Node.js module that converts a requests to functions.
 
 # Installation 
 ```sh
-$ npm install --save hartonode
+$ npm install -g hartonode
 ```
 
 # Usage
@@ -31,3 +31,6 @@ You can use it on three different ways.
 3. Generate a har file through console
 
     In the console provide `har-to-node <file_path>`. Output from this is the same as in the 2nd point.
+    
+    **WARNING!**
+    After providing this command in the console, you can get error *Error: Cannot find module 'yargs'*. Just install it also globally and try again to use this command
