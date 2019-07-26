@@ -5,7 +5,7 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "git+ssh://git@bitbucket.org/testarmydev/har_to_node.git"
+        "url": "git@github.com:MichalFidor/hartonode.git"
     },
     "keywords": [
         "parser",
