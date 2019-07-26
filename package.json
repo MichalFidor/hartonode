@@ -1,6 +1,6 @@
 {
     "name": "hartonode",
-    "version": "1.2.1",
+    "version": "1.2.2",
     "description": "Parser for requests saved to HAR file",
     "main": "index.js",
     "repository": {
@@ -18,7 +18,7 @@
     "bin": {
         "har-to-node": "./bin/cli.js"
     },
-    "homepage": "https://bitbucket.org/testarmydev/har_to_node#readme",
+    "homepage": "https://github.com/MichalFidor/hartonode",
     "dependencies": {
         "@types/jsesc": "^0.4.29",
         "@types/lodash": "^4.14.136",
