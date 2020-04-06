@@ -15,7 +15,6 @@ function help() {
   \t If no <file path> is passes, the script won't be able to convert your HAR file`)
 }
 
-
 const file = process.argv[2]
 try {
     let fileTwo = path.join(process.cwd(), `${file}`)
